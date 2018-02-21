@@ -1,6 +1,7 @@
 package com.example.sk173.login.chat;
 
 
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -41,15 +42,20 @@ public class ChatMessage extends AppCompatActivity {
         private TextView activity_item_comments;
         private TextView activity_item_userId;
         String type ="3";
+        private String userID ;
+        boolean judgementBoolean= true; //전송 버튼눌럿을때에 다시 부르기위한 판단
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             Log.e("실행1", "실행");
             setContentView(R.layout.activity_chat_message);
+            Bundle extras = getIntent().getExtras();
+            userID = extras.getString("userID");
+
+            CustomTask task= new CustomTask();
+            task.execute(type);
 
             recyclerView =  findViewById(R.id.messageActivity_recyclerview);
-
-
 
             mAdapter = new ChatMessageAdapter(itemList);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -62,16 +68,21 @@ public class ChatMessage extends AppCompatActivity {
             activity_item_comments = findViewById(R.id.activity_item_comment);
             activity_item_userId = findViewById(R.id.activity_item_userId);
 
-            CustomTask task= new CustomTask();
-            task.execute(type);
+
 
 
             message_button.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View view) {
-                    String comments = message_editText.getText().toString();
-
+                    if (message_editText.getText().toString() != null && !message_editText.getText().toString().equals("")) {
+                         type = "4";
+                        String destinationUid = "1234";
+                        String comments = message_editText.getText().toString();
+                        CustomTask task = new CustomTask();
+                        task.execute(userID, comments, destinationUid, type);
+                        message_editText.setText("");//clear
+                    }
                 }
             });
 
@@ -105,12 +116,21 @@ public class ChatMessage extends AppCompatActivity {
                 conn.setRequestMethod("POST");//데이터를 POST 방식으로 전송합니다.
                 OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
 
+
                 sendMsg = "type=" + strings[0];// "id=rain483&pwd=1234" 타입을 주어서 구별;
+                if(type=="4"){
+                    sendMsg = "userID= " + strings[0] + "&comments=" + strings[1]+"&destinationId="+strings[2]+"&type=" + strings[3];// "id=rain483&pwd=1234" 타입을 주어서 구별;
+                    judgementBoolean =false;
+                }
+
                 //회원가입처럼 보낼 데이터가 여러 개일 경우 &로 구분하여 작성합니다.
                 osw.write(sendMsg);//OutputStreamWriter에 담아 전송합니다.
                 osw.flush();
                 ////post 처리방식
-
+                if (judgementBoolean==false)
+                {
+                    clear();
+                }
                 buf  = new BufferedInputStream(conn.getInputStream());
                 // 데이터를 버퍼에 기록
                 BufferedReader bufreader = new BufferedReader(new InputStreamReader(buf, "utf-8"));
@@ -135,24 +155,19 @@ public class ChatMessage extends AppCompatActivity {
                     json = jArr.getJSONObject(i);
 
                     // name과 address의 값을 추출함
-                    String userId    = json.getString("userID");
+                    String userId   = json.getString("userID");
                     String comments = json.getString("comments");
                     String time = json.getString("time");
-
-                    // name과 address의 값을 출력함
+                    Log.e("tager","comments"+comments);
                     prepareMovieData(userId,comments,time);
                 }
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (Exception e)
+            {
                 e.printStackTrace();
             }
             //jsp로부터 받은 리턴 값입니다.
             return receiveMsg;
         }
     }
+    public void clear(){itemList.clear();}
 }

@@ -3,10 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="erpjoserjopesjropjseopejsrop"
+        android:background="@color/bg_login"
+        />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/peoplefragment_RecycleView"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>

@@ -3,9 +3,10 @@ package com.example.sk173.login.people;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ public class PeopleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
+        Log.e("들어옴","들이어ㅗㅅㄷ");
         View view = inflater.inflate(R.layout.fragment_people,container,false);
         RecyclerView recyclerView = view.findViewById(R.id.peoplefragment_RecycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));

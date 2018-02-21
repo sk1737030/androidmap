@@ -11,12 +11,22 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/activity_main_navigation"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/map" 
+        android:id="@+id/map"
+
         class="com.google.android.gms.maps.MapFragment">
     </fragment>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/activity_main_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_navigation_main" />
 
 
 </RelativeLayout>

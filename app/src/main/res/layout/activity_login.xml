@@ -1,47 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_login"
+    android:gravity="center"
+    tools:context=".LoginActivity"
     android:orientation="vertical"
-    android:layout_height="match_parent">
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
+    android:padding="10dp">
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-       >
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
     <EditText
         android:id="@+id/idLoginEdit"
-        android:layout_width="363dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="로그인"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:hint="ID"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_login"
+        android:textColorHint="@color/input_login_hint" />
+
     <EditText
         android:id="@+id/passLoginEdit"
-        android:layout_width="361dp"
-        android:layout_height="47dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="비밀번호"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="62dp" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/input_login"
+        android:textColorHint="@color/input_login_hint" />
+
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="로그인"
-        android:background="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="135dp" />
-
+        android:layout_marginTop="20dip"
+        android:background="@color/btn_login_bg"
+        android:text="@string/btn_login"
+        android:textColor="@color/btn_login" />
+    </LinearLayout>
 </LinearLayout>
